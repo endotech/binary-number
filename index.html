@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2進数から10進数への変換クイズ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f3;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question-label {
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        #submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #submit-btn:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>2進数から10進数への変換クイズ</h1>
+        <form id="quiz-form">
+            <div class="question">
+                <label class="question-label">1. 1010 は何ですか？</label>
+                <input type="text" name="q1" placeholder="答えを入力">
+            </div>
+            <div class="question">
+                <label class="question-label">2. 1101 は何ですか？</label>
+                <input type="text" name="q2" placeholder="答えを入力">
+            </div>
+            <div class="question">
+                <label class="question-label">3. 1111 は何ですか？</label>
+                <input type="text" name="q3" placeholder="答えを入力">
+            </div>
+            <div class="question">
+                <label class="question-label">4. 1001 は何ですか？</label>
+                <input type="text" name="q4" placeholder="答えを入力">
+            </div>
+            <div class="question">
+                <label class="question-label">5. 1011 は何ですか？</label>
+                <input type="text" name="q5" placeholder="答えを入力">
+            </div>
+            <div class="question">
+                <label class="question-label">6. 1100 は何ですか？</label>
+                <input type="text" name="q6" placeholder="答えを入力">
+            </div>
+            <div class="question">
+                <label class="question-label">7. 1000 は何ですか？</label>
+                <input type="text" name="q7" placeholder="答えを入力">
+            </div>
+            <div class="question">
+                <label class="question-label">8. 0110 は何ですか？</label>
+                <input type="text" name="q8" placeholder="答えを入力">
+            </div>
+            <div class="question">
+                <label class="question-label">9. 0101 は何ですか？</label>
+                <input type="text" name="q9" placeholder="答えを入力">
+            </div>
+            <div class="question">
+                <label class="question-label">10. 0011 は何ですか？</label>
+                <input type="text" name="q10" placeholder="答えを入力">
+            </div>
+            <button type="button" id="submit-btn" onclick="checkAnswers()">結果を確認する</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            var answers = {
+                q1: 10,
+                q2: 13,
+                q3: 15,
+                q4: 9,
+                q5: 11,
+                q6: 12,
+                q7: 8,
+                q8: 6,
+                q9: 5,
+                q10: 3
+            };
+            var totalCorrect = 0;
+            var resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+
+            for (var i = 1; i <= 10; i++) {
+                var userAnswer = document.forms['quiz-form']['q' + i].value;
+                var correctAnswer = answers['q' + i];
+                var questionResult = document.createElement('p');
+                if (parseInt(userAnswer) === correctAnswer) {
+                    questionResult.innerHTML = i + '. 正解！ (' + correctAnswer + ')';
+                    questionResult.className = 'correct';
+                    totalCorrect++;
+                } else {
+                    questionResult.innerHTML = i + '. 不正解。正しい答えは ' + correctAnswer + ' です。';
+                    questionResult.className = 'incorrect';
+                }
+                resultDiv.appendChild(questionResult);
+            }
+            var score = document.createElement('h2');
+            score.innerHTML = 'あなたのスコア: ' + totalCorrect + ' / 10';
+            resultDiv.insertBefore(score, resultDiv.firstChild);
+        }
+    </script>
+</body>
+</html>
